@@ -28,22 +28,22 @@ const userSlice = createSlice({
     logoutUser: (state) => {
       state.currentUser = null;
     },
-    loginRefreshStart: (state) => {
-      state.isFetching = true;
-      state.error = false;
-      state.errorMessage = "";
-    },
-    loginRefreshSuccess: (state, action) => {
-      state.isFetching = false;
-      state.currentUser = action.payload;
-      state.error = false;
-      state.errorMessage = "";
-    },
-    loginRefreshFailure: (state, action) => {
-      state.isFetching = false;
-      state.error = true;
-      state.errorMessage = action.payload;
-    },
+    // loginRefreshStart: (state) => {
+    //   state.isFetching = true;
+    //   state.error = false;
+    //   state.errorMessage = "";
+    // },
+    // loginRefreshSuccess: (state, action) => {
+    //   state.isFetching = false;
+    //   state.currentUser = action.payload;
+    //   state.error = false;
+    //   state.errorMessage = "";
+    // },
+    // loginRefreshFailure: (state, action) => {
+    //   state.isFetching = false;
+    //   state.error = true;
+    //   state.errorMessage = action.payload;
+    // },
   },
 }); //End of Slice
 

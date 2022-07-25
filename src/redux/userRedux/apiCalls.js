@@ -25,9 +25,9 @@ export const logout = async (dispatch, user) => {
   } catch (err) {}
 };
 
-export const refreshToken = async (dispatch, user) => {
-  try {
-    const res = await userRequest.post("/auth/refreshtoken", user.refreshToken);
-    console.log(res.data);
-  } catch (error) {}
-};
+// export const refreshToken = async (dispatch, user) => {
+//   try {
+//     const res = await userRequest.post("/auth/refreshtoken", user.refreshToken);
+//     console.log(res.data);
+//   } catch (error) {}
+// };
