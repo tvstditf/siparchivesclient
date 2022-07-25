@@ -36,9 +36,9 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
 `;
-const Error = styled.span`
-  color: red;
-`;
+// const Error = styled.span`
+//   color: red;
+// `;
 const Input = styled.input`
   flex: 1;
   min-width: 40%;
@@ -59,12 +59,12 @@ const Button = styled.button`
   }
 `;
 
-const Links = styled.a`
-  margin: 5px 0px;
-  font-size: 12px;
-  cursor: pointer;
-  text-decoration: none;
-`;
+// const Links = styled.a`
+//   margin: 5px 0px;
+//   font-size: 12px;
+//   cursor: pointer;
+//   text-decoration: none;
+// `;
 
 const Login = () => {
   const error = useSelector((state) => state.user.errorMessage);
