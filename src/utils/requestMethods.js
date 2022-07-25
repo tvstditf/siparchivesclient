@@ -2,7 +2,7 @@ import axios from "axios";
 
 // const BASE_URL = "http://localhost:8300/api/";
 // const BASE_URL = "http://20.20.20.30:8000/api/";
-const BASE_URL = "https://tvstditfsiparchive.herokuapp.com/";
+const BASE_URL = "https://tvstditfsiparchive.herokuapp.com/api/";
 
 export const publicRequest = axios.create({
   baseURL: BASE_URL,
