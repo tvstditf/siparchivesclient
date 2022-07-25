@@ -1,0 +1,25 @@
+const banks = [
+  { identifier: "Access Bank", id: 1 },
+  { identifier: "Citibank", id: 2 },
+  { identifier: "Diamond Bank", id: 3 },
+  { identifier: "Ecobank", id: 4 },
+  { identifier: "Fidelity Bank", id: 5 },
+  { identifier: "First Bank", id: 6 },
+  { identifier: "First City Monument Bank", id: 7 },
+  { identifier: "Guaranty Trust Bank", id: 8 },
+  { identifier: "Heritage Bank", id: 9 },
+  { identifier: "Keystone Bank", id: 10 },
+  { identifier: "Polaris Bank", id: 11 },
+  { identifier: "Providus Bank", id: 12 },
+  { identifier: "Stanbic IBTC Bank", id: 13 },
+  { identifier: "Standard Chartered Bank", id: 14 },
+  { identifier: "Sterling Bank", id: 15 },
+  { identifier: "SunTrust Bank", id: 16 },
+  { identifier: "Union Bank", id: 17 },
+  { identifier: "United Bank For Africa", id: 18 },
+  { identifier: "Unity Bank", id: 19 },
+  { identifier: "Wema Bank", id: 20 },
+  { identifier: "Zenith Bank", id: 21 },
+];
+
+export default banks;
