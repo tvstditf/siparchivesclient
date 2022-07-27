@@ -95,7 +95,9 @@ const Login = () => {
             </Alert>
           </Stack>
         )}
-        <Title>Sign In to Special Intervention Programme Databank</Title>
+        <Title>
+          Sign In to Special Intervention Programme Archives Application
+        </Title>
         <Form>
           <Input
             placeholder="Username"
