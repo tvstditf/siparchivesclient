@@ -64,9 +64,11 @@ const RightNav = ({ open }) => {
 
   return (
     <Ul open={open}>
-      <Link to="/users">
-        <Li>Users</Li>
-      </Link>
+      {user.isAdmin && (
+        <Link to="/users">
+          <Li>Users</Li>
+        </Link>
+      )}
       <Link to="/centres">
         <Li>Training Centres</Li>
       </Link>

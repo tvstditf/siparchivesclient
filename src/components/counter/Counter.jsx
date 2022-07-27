@@ -41,13 +41,14 @@ const FeaturedCounter = styled.span`
 const Counter = () => {
   const [centres, setCentres] = useState([]);
   const [trainees, setTrainees] = useState([]);
+
   useEffect(() => {
     const getNumber = async () => {
       try {
         const resTrain = await userRequest.get(`/trainee/?`);
         const resCen = await userRequest.get(`/centre/?`);
-        setTrainees(resTrain.data);
-        setCentres(resCen.data);
+        setTrainees(resTrain?.data);
+        setCentres(resCen?.data);
       } catch (error) {
         // console.log(error);
       }
