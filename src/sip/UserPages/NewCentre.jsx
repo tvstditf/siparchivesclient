@@ -161,35 +161,26 @@ const NewCentre = () => {
               name="name"
               placeholder="Training Centre"
               onChange={handleChange}
-              required
             />
             <Label>Email</Label>
-            <Input
-              name="email"
-              placeholder="Email"
-              onChange={handleChange}
-              required
-            />
+            <Input name="email" placeholder="Email" onChange={handleChange} />
             <Label>Phone Number</Label>
             <Input
               name="phoneNumber"
               placeholder="Phone Number"
               onChange={handleChange}
-              required
             />
             <Label>Contact Person</Label>
             <Input
               name="contactPerson"
               placeholder="Contact Person"
               onChange={handleChange}
-              required
             />
             <Label>Address</Label>
             <TextArea
               name="address"
               placeholder="Address"
               onChange={handleChange}
-              required
             />
             <Label>Trade Area</Label>
             <CheckboxContainer>
@@ -226,14 +217,12 @@ const NewCentre = () => {
               name="accountNumber"
               placeholder="01234567989"
               onChange={handleChange}
-              required
             />
             <Label>BVN</Label>
             <Input
               name="bvn"
               placeholder="0123456789"
               onChange={handleChange}
-              required
             />
             <Label>Tools</Label>
             <Input name="tools" placeholder="Tools" onChange={handleChange} />

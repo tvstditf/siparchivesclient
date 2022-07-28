@@ -142,21 +142,14 @@ const NewTrainee = () => {
               name="name"
               placeholder="Segun Arinze Musa"
               onChange={handleChange}
-              required
             />
             <Label>Email</Label>
-            <Input
-              name="email"
-              placeholder="Email"
-              onChange={handleChange}
-              required
-            />
+            <Input name="email" placeholder="Email" onChange={handleChange} />
             <Label>Phone Number</Label>
             <Input
               name="phoneNumber"
               placeholder="Phone Number"
               onChange={handleChange}
-              required
             />
             <Label>Date Of Birth</Label>
             <Input name="dob" onChange={handleChange} type="date" />
@@ -171,7 +164,6 @@ const NewTrainee = () => {
               name="address"
               placeholder="Address"
               onChange={handleChange}
-              required
             />
             <Label>Special Intervention Programme</Label>
             <Select name="sip" onChange={handleChange}>
@@ -212,12 +204,7 @@ const NewTrainee = () => {
               ))}
             </Select>
             <Label>Year</Label>
-            <Input
-              name="year"
-              placeholder="Year"
-              onChange={handleChange}
-              required
-            />
+            <Input name="year" placeholder="Year" onChange={handleChange} />
             <Label>Bank</Label>
             <Select name="bank" onChange={handleChange}>
               <Option selected disabled>
@@ -232,7 +219,6 @@ const NewTrainee = () => {
               name="accountNumber"
               placeholder="01234567989"
               onChange={handleChange}
-              required
             />
             <Label>BVN</Label>
             <Input
@@ -245,21 +231,14 @@ const NewTrainee = () => {
               name="nationality"
               placeholder="Nigerian"
               onChange={handleChange}
-              required
             />
             <Label>Town</Label>
-            <Input
-              name="town"
-              placeholder="Town"
-              onChange={handleChange}
-              required
-            />
+            <Input name="town" placeholder="Town" onChange={handleChange} />
             <Label>Local Government Area</Label>
             <Input
               name="localGovernmentArea"
               placeholder="Local Government Area"
               onChange={handleChange}
-              required
             />
             <Label>Educational Background</Label>
             <Input
@@ -272,7 +251,6 @@ const NewTrainee = () => {
               name="nextOfkin"
               placeholder="Next of Kin"
               onChange={handleChange}
-              required
             />
             <Label>Marital Status</Label>
             <Select name="maritalStatus" onChange={handleChange}>
@@ -285,7 +263,6 @@ const NewTrainee = () => {
               name="guarantor"
               placeholder="Guarantor's Name"
               onChange={handleChange}
-              required
             />
             <Label>Disability</Label>
             <Select name="disability" onChange={handleChange}>
