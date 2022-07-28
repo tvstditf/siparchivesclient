@@ -108,14 +108,14 @@ const Footer = () => {
       <Center>
         <Title>Useful Links</Title>
         <List>
-          <ListItem>Home</ListItem>
+          {/* <ListItem>Home</ListItem>
           <ListItem>Trainees</ListItem>
           <ListItem>Training Centres</ListItem>
           <ListItem>Users</ListItem>
           <ListItem>News</ListItem>
           <ListItem>Blog</ListItem>
           <ListItem>Terms and Conditions</ListItem>
-          <ListItem>Privacy Policy</ListItem>
+          <ListItem>Privacy Policy</ListItem> */}
         </List>
       </Center>
       <Right>
