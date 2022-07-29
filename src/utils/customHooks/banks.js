@@ -20,6 +20,7 @@ const banks = [
   { identifier: "Unity Bank", id: 19 },
   { identifier: "Wema Bank", id: 20 },
   { identifier: "Zenith Bank", id: 21 },
+  { identifier: "Central Bank of Nigeria", id: 22 },
 ];
 
 export default banks;
