@@ -11,7 +11,6 @@ import Stack from "@mui/material/Stack";
 import { mobile } from "../../utils/responsive";
 
 //Custom Hooks
-import sips from "../../utils/customHooks/sips";
 import state from "../../utils/customHooks/states";
 import tradeAreas from "../../utils/customHooks/tradearea";
 import Footer from "../../components/Footer/Footer";
