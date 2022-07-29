@@ -136,6 +136,7 @@ const SubmitButton = styled.button`
 
 const CentreDetail = () => {
   const [centre, setCentre] = useState({});
+  const [errorMessage, setErrorMessage] = useState("");
   const location = useLocation();
   const id = location.pathname.split("/")[2];
 
@@ -180,7 +181,7 @@ const CentreDetail = () => {
       await userRequest.put(`/centre/${id}`, centre);
       window.location.reload();
     } catch (error) {
-      console.log(error);
+      setErrorMessage(error?.response?.data?.message);
     }
   };
 
@@ -188,6 +189,18 @@ const CentreDetail = () => {
     <Container>
       <Navbar />
       <Wrapper>
+        {errorMessage && (
+          <Stack sx={{ margin: "10px" }} spacing={2}>
+            <Alert
+              onClose={() => {
+                setErrorMessage("");
+              }}
+              severity="error"
+            >
+              {errorMessage}
+            </Alert>
+          </Stack>
+        )}
         <WrapperLeft>
           <WrapperLeftTop>
             <Title>Training Centre Information</Title>
