@@ -45,10 +45,10 @@ const Counter = () => {
   useEffect(() => {
     const getNumber = async () => {
       try {
-        const resTrain = await userRequest.get(`/trainee/?`);
         const resCen = await userRequest.get(`/centre/?`);
-        setTrainees(resTrain?.data);
         setCentres(resCen?.data);
+        const resTrain = await userRequest.get(`/trainee/?`);
+        setTrainees(resTrain?.data);
       } catch (error) {
         // console.log(error);
       }
