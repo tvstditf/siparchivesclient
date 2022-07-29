@@ -205,7 +205,16 @@ const actionColumn = [
           <ActionDivView>
             <Link to={`/trainee/${params.row._id}`}>View</Link>
           </ActionDivView>
-          <ActionDivDelete>Delete</ActionDivDelete>
+          <ActionDivDelete
+            onClick={async () => {
+              try {
+                await userRequest.delete(`/trainee/${params.row._id}`);
+                window.location.reload();
+              } catch (error) {}
+            }}
+          >
+            Delete
+          </ActionDivDelete>
         </ActionDiv>
       );
     },
