@@ -129,6 +129,7 @@ const NewCentre = () => {
       ...inputs,
       tradeArea: ta,
     };
+    console.log(centre);
     try {
       const res = await userRequest.post(`/centre/`, centre);
       console.log(res.data);
