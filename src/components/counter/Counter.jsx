@@ -46,8 +46,8 @@ const Counter = () => {
     const getNumber = async () => {
       try {
         const resCen = await userRequest.get(`/centre/?`);
-        const resTrain = await userRequest.get(`/trainee/?`);
         setCentres(resCen?.data);
+        const resTrain = await userRequest.get(`/trainee/?`);
         setTrainees(resTrain?.data);
       } catch (error) {
         // console.log(error);
