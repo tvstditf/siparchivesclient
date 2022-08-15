@@ -12,6 +12,8 @@ const tradeAreas = [
   { identifier: "ICT", id: 11 },
   { identifier: "Air Conditioning and Refrigeration", id: 12 },
   { identifier: "Catering and Event Management", id: 13 },
+  { identifier: "Aluminium and Metal Works", id: 14 },
+  { identifier: "Tiling and POP", id: 13 },
 ];
 
 // const tradeAreas = [
