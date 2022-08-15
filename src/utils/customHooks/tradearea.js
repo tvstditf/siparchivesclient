@@ -13,7 +13,8 @@ const tradeAreas = [
   { identifier: "Air Conditioning and Refrigeration", id: 12 },
   { identifier: "Catering and Event Management", id: 13 },
   { identifier: "Aluminium Fabrication and Installation", id: 14 },
-  { identifier: "Tiling and POP", id: 13 },
+  { identifier: "Tiling and POP", id: 15 },
+  { identifier: "Photography", id: 16 },
 ];
 
 // const tradeAreas = [
