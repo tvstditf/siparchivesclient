@@ -22,6 +22,7 @@ const banks = [
   { identifier: "Zenith Bank", id: 21 },
   { identifier: "Central Bank of Nigeria", id: 22 },
   { identifier: "Jaiz Bank", id: 23 },
+  { identifier: "Skye Bank", id: 24 },
 ];
 
 export default banks;
