@@ -69,6 +69,13 @@ const RightNav = ({ open }) => {
           <Li>Users</Li>
         </Link>
       )}
+
+      <Link to="/states">
+        <Li>States</Li>
+      </Link>
+      <Link to="/tradeareas">
+        <Li>Trade Areas</Li>
+      </Link>
       <Link to="/centres">
         <Li>Training Centres</Li>
       </Link>

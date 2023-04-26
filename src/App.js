@@ -12,10 +12,17 @@ import CentreDetail from "./sip/UserPages/CentreDetail";
 import CentreList from "./sip/UserPages/CentreList";
 import Home from "./sip/UserPages/Home";
 import NewCentre from "./sip/UserPages/NewCentre";
+import NewState from "./sip/UserPages/NewState";
 import NewTrainee from "./sip/UserPages/NewTrainee";
+import NewTradeArea from "./sip/UserPages/NewTradeArea";
 import ProfilePage from "./sip/UserPages/ProfilePage";
+import StateList from "./sip/UserPages/StateList";
+import StateDetail from "./sip/UserPages/StateDetail";
 import TraineeDetail from "./sip/UserPages/TraineeDetail";
 import TraineeList from "./sip/UserPages/TraineeList";
+import TradeAreaDetail from "./sip/UserPages/TradeAreaDetail";
+import TradeAreaList from "./sip/UserPages/TradeAreaList";
+
 import UserList from "./sip/UserPages/UserList";
 
 const App = () => {
@@ -43,6 +50,16 @@ const App = () => {
             {/* User Pages */}
             <Route path="/users" element={<UserList />} />
             <Route path="/user/:id" element={<ProfilePage />} />
+
+            {/* State */}
+            <Route path="/states" element={<StateList />} />
+            <Route path="/state/:id" element={<StateDetail />} />
+            <Route path="/newstate" element={<NewState />} />
+
+            {/* Trade Areas */}
+            <Route path="/tradeareas" element={<TradeAreaList />} />
+            <Route path="/tradearea/:id" element={<TradeAreaDetail />} />
+            <Route path="/newtradearea" element={<NewTradeArea />} />
           </>
         </Routes>
       ) : (

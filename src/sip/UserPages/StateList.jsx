@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Navbar from "../../components/Navbar/Navbar";
 import { DataGrid } from "@mui/x-data-grid";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { CSVLink } from "react-csv";
-import { userRequest } from "../../utils/requestMethods";
+import { publicRequest, userRequest } from "../../utils/requestMethods";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
-import Footer from "../../components/Footer/Footer";
 import { mobile } from "../../utils/responsive";
+import tradeAreas from "../../utils/customHooks/tradearea";
+import state from "../../utils/customHooks/states";
+import SIPS from "../../utils/customHooks/sips";
 
 const Container = styled.div`
   width: 100%;
@@ -22,20 +24,6 @@ const Container = styled.div`
 `;
 
 const Wrapper = styled.div``;
-
-const MiddleContainer = styled.div`
-  margin-left: 50px;
-  margin-right: 50px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  ${mobile({ margin: "10px" })}
-`;
-
-const TopMiddle = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
 const LeftTop = styled.p`
   font-size: 30px;
 `;
@@ -52,6 +40,18 @@ const RightTop = styled.button`
   }
 `;
 
+const MiddleContainer = styled.div`
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  ${mobile({ margin: "10px" })}
+`;
+
+const TopMiddle = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
 const BottomMiddle = styled.div``;
 
 const QueryForm = styled.form`
@@ -134,39 +134,13 @@ const ActionDivDelete = styled.button`
 `;
 
 const columns = [
-  // { field: "id", headerName: "ID", width: 50 },
   {
     field: "name",
     headerName: "Name",
     width: 200,
     editable: true,
   },
-  {
-    field: "tradeArea",
-    headerName: "Trade Area",
-    width: 250,
-    editable: true,
-  },
-  // {
-  //   field: "tradeArea",
-  //   headerName: "Trade Area",
-  //   width: 200,
-  //   editable: true,
-  // },
-  {
-    field: "state",
-    headerName: "State",
-    width: 110,
-    editable: true,
-  },
-  {
-    field: "bank",
-    headerName: "Bank",
-    width: 200,
-    editable: true,
-  },
 ];
-let deleteData = "";
 const actionColumn = [
   {
     field: "action",
@@ -176,12 +150,12 @@ const actionColumn = [
       return (
         <ActionDiv>
           <ActionDivView>
-            <Link to={`/centre/${params.row._id}`}>View</Link>
+            <Link to={`/state/${params.row._id}`}>View</Link>
           </ActionDivView>
           <ActionDivDelete
             onClick={async () => {
               try {
-                await userRequest.delete(`/centre/${params.row._id}`);
+                await userRequest.delete(`/state/${params.row._id}`);
                 window.location.reload();
               } catch (error) {}
             }}
@@ -194,102 +168,24 @@ const actionColumn = [
   },
 ];
 
-const CentreList = () => {
-  const [centres, setCentres] = useState([]);
-  // const [inputs, setInputs] = useState([]);
+const StateList = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [deleteMessage, setDeleteMessage] = useState("");
-
   const [states, setStates] = useState([]);
-  const [tradeAreas, setTradeAreas] = useState([]);
 
   useEffect(() => {
-    const getItemsFromDB = async () => {
-      const resState = await userRequest.get(`/state`);
-      setStates(resState.data);
-      const resTradeArea = await userRequest.get(`/tradearea`);
-      setTradeAreas(resTradeArea.data);
+    const getStates = async () => {
+      const res = await publicRequest.get("/state");
+      setStates(res.data);
     };
-    getItemsFromDB();
+    getStates();
   }, []);
-
-  const [st, setST] = useState("");
-  const [ta, setTA] = useState("");
-
-  const handleStateChange = (e) => {
-    e.preventDefault();
-    setST(e.target.value);
-  };
-  const handleTAChange = (e) => {
-    e.preventDefault();
-    setTA(e.target.value);
-  };
-
-  // const handleChange = (e) => {
-  //   e.preventDefault();
-  //   setInputs((prev) => {
-  //     return {
-  //       ...prev,
-  //       [e?.target?.name]: e?.target?.name + "=" + e?.target?.value,
-  //     };
-  //   });
-  // };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    let query = "";
-
-    if (ta === "" && st === "") {
-      query = "?";
-    } else if (st === "") {
-      const queryTA = `?tradeArea=${ta}`;
-      query = queryTA;
-    } else if (ta === "") {
-      const queryState = `?state=${st}`;
-      query = queryState;
-    } else {
-      query = `?state=${st}&tradeArea=${ta}`;
-    }
-
-    console.log(query);
-
-    try {
-      const res = await userRequest.get(`/centre/${query}`);
-      setCentres(res.data);
-    } catch (error) {
-      setErrorMessage(error?.response?.data?.message);
-      console.log(error?.response?.data?.message);
-    }
-  };
-
-  const fileName = "centres-list";
+  const fileName = "state-list";
   const headers = [
     { label: "Name", key: "name" },
-    { label: "Email", key: "email" },
-    { label: "Phone Number", key: "phoneNumber" },
-    { label: "Contact Person", key: "contactPerson" },
-    { label: "Gender", key: "gender" },
-    { label: "Special Intervention Program", key: "sip" },
-    { label: "State", key: "state" },
-    { label: "Address", key: "address" },
-    { label: "Tools", key: "tools" },
-    { label: "Equipment", key: "equipment" },
-    { label: "Number of Instructors", key: "numberOfInstructors" },
-    { label: "Bank", key: "bank" },
-    { label: "Account Number", key: "accountNumber" },
-    { label: "BVN", key: "bvn" },
-    { label: "Assessed by Team Leader", key: "assessedbyTeamLeader" },
-    { label: "Assessed by First Officer", key: "assessedbyOfficer1" },
-    { label: "Assessed by Second Officer", key: "assessedbyOfficer2" },
-    { label: "Assessed by Area Office Leader", key: "assessedbyAOLeader" },
-    { label: "Assessed by Area Office Officer", key: "assessedbybyAOOfficer" },
-    { label: "Year Assessed", key: "yearAssessed" },
-    { label: "Year Re-Assessed", key: "yearReAssessed" },
-    { label: "Operational Status", key: "operationalStatus" },
-    { label: "Trade Area", key: "tradeArea" },
+    { label: "Trade Areas", key: "tradeArea" },
+    { label: "Special Intervention Programmes", key: "sips" },
   ];
-
   return (
     <Container>
       <Navbar />
@@ -298,7 +194,7 @@ const CentreList = () => {
           <TopMiddle>
             <LeftTop>Query Training Centre Database</LeftTop>
             <RightTop>
-              <Link to="/newcentre">Add New</Link>{" "}
+              <Link to="/newstate">Add New</Link>{" "}
             </RightTop>
           </TopMiddle>
           <BottomMiddle>
@@ -326,45 +222,45 @@ const CentreList = () => {
                 </Alert>
               </Stack>
             )}
-            <QueryForm>
+            {/* <QueryForm>
               <QueryDiv>
-                <Select name="tradeArea" onChange={handleTAChange}>
+                <Select name="tradeArea">
                   <Option selected disabled>
                     Please Select a Trade Area
                   </Option>
                   {tradeAreas.map((s) => (
-                    <Option key={s._id}>{s.name}</Option>
+                    <Option key={s.id}>{s.identifier}</Option>
                   ))}
                 </Select>
               </QueryDiv>
               <QueryDiv>
-                <Select name="state" onChange={handleStateChange}>
+                <Select name="state">
                   <Option selected disabled>
-                    Please Select a State
+                    Please Select a Special Intervention Programme
                   </Option>
-                  {states.map((s) => (
-                    <Option key={s._id}>{s.name}</Option>
+                  {SIPS.map((s) => (
+                    <Option key={s.id}>{s.identifier}</Option>
                   ))}
                 </Select>
               </QueryDiv>
-
               <QueryDiv>
-                <Submit onClick={handleSubmit}>Submit</Submit>
+                <Submit>Submit</Submit>
               </QueryDiv>
-            </QueryForm>
+            </QueryForm> */}
           </BottomMiddle>
         </MiddleContainer>
+
         <TableContainer>
           <TableContainerTitle>Training Centre Information</TableContainerTitle>
           <div style={{ height: 500, width: "100%", marginBottom: "100px" }}>
             <ExportButton>
-              <CSVLink headers={headers} data={centres} filename={fileName}>
+              <CSVLink headers={headers} data={states} filename={fileName}>
                 Export
               </CSVLink>
             </ExportButton>
             <DataGrid
               style={{ marginLeft: "15px", marginRight: "15px" }}
-              rows={centres}
+              rows={states}
               getRowId={(row) => row._id}
               columns={columns.concat(actionColumn)}
               pageSize={10}
@@ -374,9 +270,8 @@ const CentreList = () => {
           </div>
         </TableContainer>
       </Wrapper>
-      <Footer />
     </Container>
   );
 };
 
-export default CentreList;
+export default StateList;

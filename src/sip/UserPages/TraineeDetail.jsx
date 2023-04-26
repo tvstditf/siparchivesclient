@@ -6,9 +6,7 @@ import { userRequest } from "../../utils/requestMethods";
 import { mobile } from "../../utils/responsive";
 
 //Custom Hooks
-import state from "../../utils/customHooks/states";
 import banks from "../../utils/customHooks/banks";
-import tradeAreas from "../../utils/customHooks/tradearea";
 import sips from "../../utils/customHooks/sips";
 import Footer from "../../components/Footer/Footer";
 
@@ -65,6 +63,7 @@ const WrapperFormContainer = styled.div`
   justify-content: center;
   align-items: center;
   width: 90%;
+  padding: 50px;
 `;
 
 const Form = styled.form`
@@ -115,18 +114,26 @@ const TraineeDetail = () => {
   const [traineeInfo, setTraineeInfo] = useState({});
   const [centre, setCentre] = useState("");
   const [centres, setCentres] = useState([]);
+  const [states, setStates] = useState([]);
+  const [tradeAreas, setTradeAreas] = useState([]);
   const [inputs, setInputs] = useState([]);
   const location = useLocation();
   const id = location.pathname.split("/")[2];
 
   useEffect(() => {
     const getTrainee = async () => {
+      const resState = await userRequest.get(`/state`);
+      setStates(resState.data);
+      const resTradeArea = await userRequest.get(`/tradearea`);
+      setTradeAreas(resTradeArea.data);
+      const getCen = await userRequest.get("/centre");
+      setCentres(getCen.data);
       const res = await userRequest.get(`/trainee/find/${id}`);
       setTraineeInfo(res.data);
+      // console.log(res.data);
       const resCen = await userRequest.get(`/centre/find/${res.data.centreId}`);
       setCentre(resCen.data);
-      const getCen = await userRequest.get("centre");
-      setCentres(getCen.data);
+      // console.log(resCen.data);
     };
     getTrainee();
   }, [id]);
@@ -143,6 +150,8 @@ const TraineeDetail = () => {
     const trainee = {
       ...inputs,
     };
+
+    console.log(trainee);
     try {
       await userRequest.put(`/trainee/${id}`, trainee);
       // console.log(res.data);
@@ -223,10 +232,10 @@ const TraineeDetail = () => {
               <WrapperInfoKey>Account Number: </WrapperInfoKey>
               <WrapperInfoValue>{traineeInfo.accountNumber}</WrapperInfoValue>
             </WrapperBodyContainer>
-            <WrapperBodyContainer>
+            {/* <WrapperBodyContainer>
               <WrapperInfoKey>BVN: </WrapperInfoKey>
               <WrapperInfoValue>{traineeInfo.bvn}</WrapperInfoValue>
-            </WrapperBodyContainer>
+            </WrapperBodyContainer> */}
             <WrapperBodyContainer>
               <WrapperInfoKey>Nationality: </WrapperInfoKey>
               <WrapperInfoValue>{traineeInfo.nationality}</WrapperInfoValue>
@@ -322,7 +331,7 @@ const TraineeDetail = () => {
                   Please Select a Trade Area
                 </Option>
                 {tradeAreas.map((s) => (
-                  <Option key={s.id}>{s.identifier}</Option>
+                  <Option key={s._id}>{s.name}</Option>
                 ))}
               </Select>
               <Label>State</Label>
@@ -330,8 +339,8 @@ const TraineeDetail = () => {
                 <Option selected disabled>
                   Please Select a State
                 </Option>
-                {state.map((s) => (
-                  <Option key={s.id}>{s.identifier}</Option>
+                {states.map((s) => (
+                  <Option key={s._id}>{s.name}</Option>
                 ))}
               </Select>
               <Label>Centre </Label>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Navbar from "../../components/Navbar/Navbar";
 import { userRequest } from "../../utils/requestMethods";
@@ -7,9 +7,7 @@ import Stack from "@mui/material/Stack";
 import Footer from "../../components/Footer/Footer";
 import { mobile } from "../../utils/responsive";
 //Custom Hooks
-import state from "../../utils/customHooks/states";
 import banks from "../../utils/customHooks/banks";
-import tradeAreas from "../../utils/customHooks/tradearea";
 
 const Container = styled.div`
   background: linear-gradient(
@@ -36,6 +34,7 @@ const FormContainer = styled.div`
   background-color: white;
   justify-content: center;
   align-items: center;
+  padding: 50px;
   ${mobile({ width: "100%" })}
 `;
 
@@ -102,6 +101,18 @@ const NewCentre = () => {
   const [inputs, setInputs] = useState([]);
   const [ta, setTA] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
+  const [states, setStates] = useState([]);
+  const [tradeAreas, setTradeAreas] = useState([]);
+
+  useEffect(() => {
+    const getItemsFromDB = async () => {
+      const resState = await userRequest.get(`/state`);
+      setStates(resState.data);
+      const resTradeArea = await userRequest.get(`/tradearea`);
+      setTradeAreas(resTradeArea.data);
+    };
+    getItemsFromDB();
+  }, []);
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -111,14 +122,14 @@ const NewCentre = () => {
   };
 
   const handleTradeAreaChange = (e, t) => {
-    const foundInArray = ta.some((item) => item.id === t.id);
+    const foundInArray = ta.some((item) => item._id === t._id);
 
     //if item has been clicked/added to array, remove from array and uncheck
     if (foundInArray) {
-      setTA((x) => x.filter((item) => item.id !== t.id));
+      setTA((x) => x.filter((item) => item._id !== t._id));
     } else {
       setTA((x) => {
-        return [...x, t.identifier];
+        return [...x, t.name];
       });
     }
   };
@@ -191,7 +202,7 @@ const NewCentre = () => {
                     type="checkbox"
                     onClick={(e) => handleTradeAreaChange(e, t)}
                   />
-                  <CheckboxLabel>{t.identifier} </CheckboxLabel>
+                  <CheckboxLabel>{t.name} </CheckboxLabel>
                 </CheckboxWrapper>
               ))}
             </CheckboxContainer>
@@ -200,8 +211,8 @@ const NewCentre = () => {
               <Option selected disabled>
                 Please Select a State
               </Option>
-              {state.map((s) => (
-                <Option key={s.id}>{s.identifier}</Option>
+              {states.map((s) => (
+                <Option key={s._id}>{s.name}</Option>
               ))}
             </Select>
             <Label>Bank</Label>
@@ -219,7 +230,7 @@ const NewCentre = () => {
               placeholder="01234567989"
               onChange={handleChange}
             />
-            <Label>BVN</Label>
+            {/* <Label>BVN</Label>
             <Input
               name="bvn"
               placeholder="0123456789"
@@ -288,7 +299,7 @@ const NewCentre = () => {
               </Option>
               <Option value="Active">Active</Option>
               <Option value="In-Active">In-Active</Option>
-            </Select>
+            </Select> */}
 
             <SubmitButton onClick={handleSubmit}>Submit</SubmitButton>
           </Form>

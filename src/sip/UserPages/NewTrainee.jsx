@@ -8,10 +8,7 @@ import Footer from "../../components/Footer/Footer";
 import { mobile } from "../../utils/responsive";
 
 //Custom Hooks
-import state from "../../utils/customHooks/states";
 import banks from "../../utils/customHooks/banks";
-import tradeAreas from "../../utils/customHooks/tradearea";
-import sips from "../../utils/customHooks/sips";
 
 const Container = styled.div`
   background: linear-gradient(
@@ -88,6 +85,22 @@ const NewTrainee = () => {
   const [inputs, setInputs] = useState([]);
   const [centres, setCentres] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
+
+  const [states, setStates] = useState([]);
+  const [tradeAreas, setTradeAreas] = useState([]);
+  const [sips, setSips] = useState([]);
+
+  useEffect(() => {
+    const getItemsFromDB = async () => {
+      const resState = await userRequest.get(`/state`);
+      setStates(resState.data);
+      const resTradeArea = await userRequest.get(`/tradearea`);
+      setTradeAreas(resTradeArea.data);
+      const resSIP = await userRequest.get(`/sip`);
+      setSips(resSIP.data);
+    };
+    getItemsFromDB();
+  }, []);
 
   useEffect(() => {
     const getCentres = async () => {
@@ -171,7 +184,7 @@ const NewTrainee = () => {
                 Please Select a Special Intervention Programme
               </Option>
               {sips.map((s) => (
-                <Option key={s.id}>{s.identifier}</Option>
+                <Option key={s._id}>{s.name}</Option>
               ))}
             </Select>
             <Label>Trade Area</Label>
@@ -180,7 +193,7 @@ const NewTrainee = () => {
                 Please Select a Trade Area
               </Option>
               {tradeAreas.map((s) => (
-                <Option key={s.id}>{s.identifier}</Option>
+                <Option key={s._id}>{s.name}</Option>
               ))}
             </Select>
             <Label>State</Label>
@@ -188,8 +201,8 @@ const NewTrainee = () => {
               <Option selected disabled>
                 Please Select a State
               </Option>
-              {state.map((s) => (
-                <Option key={s.id}>{s.identifier}</Option>
+              {states.map((s) => (
+                <Option key={s._id}>{s.name}</Option>
               ))}
             </Select>
             <Label>Centre </Label>
@@ -220,12 +233,7 @@ const NewTrainee = () => {
               placeholder="01234567989"
               onChange={handleChange}
             />
-            <Label>BVN</Label>
-            <Input
-              name="bvn"
-              placeholder="0123456789"
-              onChange={handleChange}
-            />
+
             <Label>Nationality</Label>
             <Input
               name="nationality"
