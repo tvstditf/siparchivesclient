@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const BASE_URL = process.env.REACT_APP_BASE_URL;
+// const BASE_URL = process.env.REACT_APP_BASE_URL;
+
+const BASE_URL = "https://sip-databank-api-b6375c164739.herokuapp.com/api/";
 
 export const publicRequest = axios.create({
   baseURL: BASE_URL,
