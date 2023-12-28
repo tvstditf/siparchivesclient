@@ -132,7 +132,7 @@ const Footer = () => {
         </ContactItem>
         <ContactItem>
           <DesignServices style={{ marginRight: "10px", fontSize: "15px" }} />{" "}
-          Website Made with Love by Papijo
+          Website Made with Love by TVSTD Databank Team
         </ContactItem>
       </Right>
     </Container>
