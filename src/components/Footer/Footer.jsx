@@ -125,10 +125,10 @@ const Footer = () => {
           Training Fund HQ, No 1, Miango Road, Jos
         </ContactItem>
         <ContactItem>
-          <Phone style={{ marginRight: "10px" }} /> +234 806 000 1111
+          <Phone style={{ marginRight: "10px" }} /> +234
         </ContactItem>
         <ContactItem>
-          <MailOutline style={{ marginRight: "10px" }} /> email@email.com
+          <MailOutline style={{ marginRight: "10px" }} /> tvstd@itf.gov.ng
         </ContactItem>
         <ContactItem>
           <DesignServices style={{ marginRight: "10px", fontSize: "15px" }} />{" "}
